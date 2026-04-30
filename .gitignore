@@ -1,0 +1,51 @@
+# ─── Dependencies ────────────────────────────────────────────────────────────
+node_modules/
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# ─── Next.js build output ────────────────────────────────────────────────────
+/.next/
+/out/
+/build
+
+# ─── Environment files — NEVER commit secrets ────────────────────────────────
+.env
+.env.local
+.env*.local
+.env.development
+.env.production
+.env.staging
+
+# ─── Generated at build time ─────────────────────────────────────────────────
+public/sitemap*.xml
+public/robots.txt
+next-env.d.ts
+*.tsbuildinfo
+
+# ─── Local AI tooling sessions ───────────────────────────────────────────────
+.claude/
+.superpowers/
+
+# ─── OS files ────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.pem
+
+# ─── Debug logs ──────────────────────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ─── Editor ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── Vercel ──────────────────────────────────────────────────────────────────
+.vercel
+
+# ─── Testing coverage ────────────────────────────────────────────────────────
+/coverage
