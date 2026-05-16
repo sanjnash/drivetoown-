@@ -27,6 +27,11 @@ next-env.d.ts
 .claude/
 .superpowers/
 
+# ─── Dev-only files (not needed on server) ───────────────────────────────────
+docs/
+scaffold.sh
+CLAUDE.md
+
 # ─── OS files ────────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db

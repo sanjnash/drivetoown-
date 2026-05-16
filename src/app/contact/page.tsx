@@ -1,14 +1,10 @@
-'use client';
-
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { Phone, Mail, MapPin, Clock, MessageCircle, ArrowRight } from 'lucide-react';
-import { ContactForm } from '@/components/contact/ContactForm';
 import { MapEmbed } from '@/components/contact/MapEmbed';
 
-function ContactPageInner() {
-  const searchParams = useSearchParams();
-  const prefillCar = searchParams.get('car') ?? undefined;
+export default function ContactPage() {
+  const phone = process.env.NEXT_PUBLIC_PHONE_MELBOURNE ?? '+61455445285';
+  const email = process.env.NEXT_PUBLIC_EMAIL ?? 'hello@drivetoown.com.au';
+  const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '61455445285';
 
   return (
     <>
@@ -24,27 +20,27 @@ function ContactPageInner() {
               Let&apos;s Get You Behind the Wheel
             </h1>
             <p className="mb-10 text-lg text-white/70">
-              Have a question or ready to apply? We&apos;re here to help. Reach out and we&apos;ll get back to you within 24 hours.
+              Ready to apply or have a question? Call or message us — we&apos;re here to help.
             </p>
 
             {/* Quick contact pills */}
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
-                href={`tel:${process.env.NEXT_PUBLIC_PHONE_MELBOURNE}`}
+                href={`tel:${phone}`}
                 className="flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
               >
                 <Phone className="h-4 w-4 text-red" aria-hidden="true" />
-                {process.env.NEXT_PUBLIC_PHONE_MELBOURNE ?? '+61 455 445 285'}
+                {phone}
               </a>
               <a
-                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
+                href={`mailto:${email}`}
                 className="flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
               >
                 <Mail className="h-4 w-4 text-red" aria-hidden="true" />
-                {process.env.NEXT_PUBLIC_EMAIL ?? 'hello@drivetoown.com.au'}
+                {email}
               </a>
               <a
-                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
+                href={`https://wa.me/${whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-full bg-[#25D366]/20 px-5 py-2.5 text-sm font-semibold text-[#25D366] transition-colors hover:bg-[#25D366]/30"
@@ -57,20 +53,73 @@ function ContactPageInner() {
         </div>
       </section>
 
-      {/* Form + Info */}
+      {/* CTA cards + Info panel */}
       <section className="bg-sky py-16 md:py-24">
         <div className="container-custom">
           <div className="grid gap-10 lg:grid-cols-5">
 
-            {/* Form card */}
+            {/* Reach us card */}
             <div className="overflow-hidden rounded-2xl bg-white shadow-card lg:col-span-3">
-              {/* Card header */}
               <div className="bg-navy px-8 py-5">
-                <h2 className="text-xl font-bold text-white">Send Us a Message</h2>
-                <p className="mt-1 text-sm text-white/60">Fill in the form and we&apos;ll be in touch shortly.</p>
+                <h2 className="text-xl font-bold text-white">Get in Touch</h2>
+                <p className="mt-1 text-sm text-white/60">Pick the option that suits you best.</p>
               </div>
-              <div className="p-8">
-                <ContactForm prefillCar={prefillCar} />
+              <div className="space-y-4 p-8">
+                {/* Call */}
+                <a
+                  href={`tel:${phone}`}
+                  className="group flex items-center justify-between rounded-xl border border-border p-5 transition-colors hover:border-red hover:bg-sky"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red/10">
+                      <Phone className="h-6 w-6 text-red" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-navy">Call Us</p>
+                      <p className="text-sm text-muted">Speak to us directly — fastest response</p>
+                      <p className="mt-0.5 font-semibold text-red">{phone}</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-5 w-5 text-muted transition-transform group-hover:translate-x-1 group-hover:text-red" aria-hidden="true" />
+                </a>
+
+                {/* WhatsApp */}
+                <a
+                  href={`https://wa.me/${whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 p-5 transition-colors hover:bg-[#25D366]/20"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366]/20">
+                      <MessageCircle className="h-6 w-6 text-[#25D366]" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-navy">WhatsApp</p>
+                      <p className="text-sm text-muted">Message us anytime — we reply within hours</p>
+                      <p className="mt-0.5 font-semibold text-[#25D366]">Chat now</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-5 w-5 text-muted transition-transform group-hover:translate-x-1 group-hover:text-[#25D366]" aria-hidden="true" />
+                </a>
+
+                {/* Email */}
+                <a
+                  href={`mailto:${email}`}
+                  className="group flex items-center justify-between rounded-xl border border-border p-5 transition-colors hover:border-red hover:bg-sky"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red/10">
+                      <Mail className="h-6 w-6 text-red" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-navy">Email Us</p>
+                      <p className="text-sm text-muted">Send us your question — reply within 24 hours</p>
+                      <p className="mt-0.5 font-semibold text-red">{email}</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-5 w-5 text-muted transition-transform group-hover:translate-x-1 group-hover:text-red" aria-hidden="true" />
+                </a>
               </div>
             </div>
 
@@ -98,10 +147,10 @@ function ContactPageInner() {
                     <div>
                       <p className="text-xs font-bold uppercase tracking-wider text-muted">Phone</p>
                       <a
-                        href={`tel:${process.env.NEXT_PUBLIC_PHONE_MELBOURNE}`}
+                        href={`tel:${phone}`}
                         className="mt-0.5 block font-semibold text-navy transition-colors hover:text-red"
                       >
-                        {process.env.NEXT_PUBLIC_PHONE_MELBOURNE ?? '+61 455 445 285'}
+                        {phone}
                       </a>
                     </div>
                   </li>
@@ -112,10 +161,10 @@ function ContactPageInner() {
                     <div>
                       <p className="text-xs font-bold uppercase tracking-wider text-muted">Email</p>
                       <a
-                        href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
+                        href={`mailto:${email}`}
                         className="mt-0.5 block font-semibold text-navy transition-colors hover:text-red"
                       >
-                        {process.env.NEXT_PUBLIC_EMAIL ?? 'hello@drivetoown.com.au'}
+                        {email}
                       </a>
                     </div>
                   </li>
@@ -131,23 +180,6 @@ function ContactPageInner() {
                   </li>
                 </ul>
               </div>
-
-              {/* WhatsApp CTA */}
-              <a
-                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between rounded-2xl bg-[#25D366] p-5 text-white shadow-card transition-opacity hover:opacity-90"
-              >
-                <div className="flex items-center gap-3">
-                  <MessageCircle className="h-6 w-6" aria-hidden="true" />
-                  <div>
-                    <p className="font-bold">Chat on WhatsApp</p>
-                    <p className="text-sm text-white/80">Get a quick response</p>
-                  </div>
-                </div>
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </a>
 
               {/* Response time badge */}
               <div className="rounded-2xl border border-border bg-white p-5 shadow-card">
@@ -177,13 +209,5 @@ function ContactPageInner() {
         </div>
       </section>
     </>
-  );
-}
-
-export default function ContactPage() {
-  return (
-    <Suspense>
-      <ContactPageInner />
-    </Suspense>
   );
 }
